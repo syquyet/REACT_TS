@@ -10,7 +10,7 @@ function App() {
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
-      <h1>xin chào bài 9</h1>
+      <h1>xin chào bài 10</h1>
       </header>
     </div>
   );
