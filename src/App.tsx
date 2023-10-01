@@ -5,6 +5,7 @@ import Control from "./components/control";
 import ListStudent from "./components/ListStudent";
 import Form from "./components/Form";
 
+
 function App() {
   return (
     <div className="row">
@@ -14,7 +15,7 @@ function App() {
           <ListStudent />
         </div>
       </div>
-      <Form />
+      {/* <Form /> */}
     </div>
   );
 }
