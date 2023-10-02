@@ -1,5 +1,4 @@
 import { Component, ReactNode } from "react";
-
 class Control extends Component {
   render() {
     return (
