@@ -21,7 +21,6 @@ class Register extends Component {
       formData: { ...this.state.formData, [name]: value },
     });
     console.log(2222,this.state.formData);
-     
   };
 
   render(): ReactNode {
