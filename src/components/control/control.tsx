@@ -1,11 +1,15 @@
 import { Component, ReactNode } from "react";
-class Control extends Component {
+class Control extends Component<{ onShowForm: Function }> {
   render() {
     return (
       <div className="card-header">
         <div className="row">
           <div className="col-3">
-            <button type="button" className="btn btn-primary btn-icon-text">
+            <button
+              type="button"
+              className="btn btn-primary btn-icon-text"
+              onClick={() => this.props.onShowForm(true,"add")}
+            >
               Thêm mới sinh viên
             </button>
           </div>

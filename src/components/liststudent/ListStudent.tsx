@@ -1,8 +1,14 @@
 import { Component, ReactNode } from "react";
 
-import { students } from "../../modles/data";
+import { studentsDB } from "../../modles/data";
+import { IStudent } from "../../types/type";
 
-class ListStudent extends Component {
+class ListStudent extends Component<{
+  onDelete: Function;
+  data: IStudent[];
+  onViewForm: Function;
+  onAddEditForm: Function;
+}> {
   render() {
     return (
       <div className="card-body">
@@ -20,37 +26,45 @@ class ListStudent extends Component {
               </tr>
             </thead>
             <tbody>
-              {students.map((student, index) => (
-                <tr>
-                  <td>{index+1}</td>
-                  <td>{student.id}</td>
-                  <td>{student.name}</td>
-                  <td>{student.age}</td>
-                  <td>{student.gender?"nam":"nữ"}</td>
-                  <td>
-                    <div className="template-demo">
-                      <button
-                        type="button"
-                        className="btn btn-danger btn-icon-text"
-                      >
-                        Xem
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-warning btn-icon-text"
-                      >
-                        Sửa
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-success btn-icon-text"
-                      >
-                        Xóa
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
+              {this.props.data.length > 0 &&
+                this.props.data.map((student, index) => (
+                  <tr>
+                    <td>{index + 1}</td>
+                    <td>{student.id}</td>
+                    <td>{student.name}</td>
+                    <td>{student.age}</td>
+                    <td>{student.gender ? "nam" : "nữ"}</td>
+                    <td>
+                      <div className="template-demo">
+                        <button
+                          type="button"
+                          className="btn btn-danger btn-icon-text"
+                          onClick={() =>
+                            this.props.onViewForm(student.id, "view")
+                          }
+                        >
+                          Xem
+                        </button>
+                        <button
+                          type="button"
+                          className="btn btn-warning btn-icon-text"
+                          onClick={() =>
+                            this.props.onAddEditForm(student, "edit")
+                          }
+                        >
+                          Sửa
+                        </button>
+                        <button
+                          type="button"
+                          className="btn btn-success btn-icon-text"
+                          onClick={() => this.props.onDelete(student.id)}
+                        >
+                          Xóa
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>

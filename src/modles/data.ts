@@ -1,52 +1,47 @@
-
-
-
-
-
-export const students = [
+export const studentsDB = [
   {
     id: "SV1",
     name: "Nguyễn Văn A",
-    age: 18,
-    gender: true,
+    age: "18",
+    gender: "male",
     doB: "12-09-2005",
-    poB: "Quảng Bình",
+    poB: "59",
     address: "Quảng BÌnh",
   },
   {
     id: "SV2",
     name: "Nguyễn Văn B",
-    age: 19,
-    gender: false,
+    age: "19",
+    gender: "female",
     doB: "12-09-2003",
-    poB: "Quảng Bình",
+    poB: "29",
     address: "Đà Nẵng",
   },
   {
     id: "SV3",
     name: "Nguyễn Văn C",
-    age: 20,
-    gender: true,
+    age: "20",
+    gender: "male",
     doB: "12-09-2003",
-    poB: "Quảng Bình",
+    poB: "43",
     address: "Hà Nội",
   },
   {
     id: "SV4",
     name: "Nguyễn Văn D",
-    age: 18,
-    gender: false,
+    age: "18",
+    gender: "female",
     doB: "12-09-2003",
-    poB: "Quảng Bình",
+    poB: "59",
     address: "Cần Thơ",
   },
   {
     id: "SV5",
     name: "Nguyễn Văn E",
-    age: 19,
-    gender: true,
+    age: "19",
+    gender: "female",
     doB: "12-09-2004",
-    poB: "Quảng Bình",
+    poB: "29",
     address: "Hải Phòng",
   },
 ];
