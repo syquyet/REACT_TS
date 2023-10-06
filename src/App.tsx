@@ -1,25 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import Header from "./components/Header";
+import ModalAuth from "./components/ModalAuth";
+import { useState } from "react";
+import Antd from "./antd/antd";
 function App() {
+  const [show, setShow] = useState(false);
+  const handleShow = (status:boolean) => setShow(status);
+  console.log(1111111);
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header onHandleShow ={handleShow} />
+      <ModalAuth show={show}onClose={handleShow} />
+      <Antd/>
+    </>
   );
 }
 
