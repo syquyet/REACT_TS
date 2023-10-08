@@ -1,14 +1,12 @@
-import { Component, ReactNode } from "react";
-import "./Header.css"
-
-class Header extends Component {
-  render() {
-    return (
+import "./header.css";
+export default function Header() {
+  return (
+    <>
       <header>
         <nav>
           <ul>
             <li className="logo-content">
-              <img src="" alt="" />
+              <img src="/assets/image/logo.jpg" alt="" />
               <big>SUONGG STORE</big>
             </li>
           </ul>
@@ -36,14 +34,11 @@ class Header extends Component {
               <button>Đăng nhập</button>
             </li>
             <li>
-              <a href="">
-                <i className="fa-solid fa-cart-shopping" />
-              </a>
+              <i className="fa-solid fa-cart-shopping" />
             </li>
           </ul>
         </nav>
       </header>
-    );
-  }
+    </>
+  );
 }
-export default Header;

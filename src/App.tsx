@@ -1,21 +1,22 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
-// import "./App.css";
-import Header from "./page/components/Header/Header";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Footer from "./page/components/Footer/Footer";
-import Product from "./page/user/product/product";
-import Register from "./page/auth/register/register";
+
+import Header from "./components/header";
+import { routes } from "./routes";
 
 class App extends Component {
   render() {
     return (
       <>
-        <Header />
-        <Product />
-        <hr />
-        <Register />
-       <Footer />
+        <BrowserRouter>
+          <Header />
+          <Routes>
+            {routes.map((route, index) => (
+              <Route key={index} path={route.path} element={route.element} />
+            ))}
+          </Routes>
+        </BrowserRouter>
       </>
     );
   }
