@@ -6,10 +6,12 @@ import Home from "./page/Home";
 import Error from "./page/Error";
 import Payment from "./page/User/Product/payment";
 import Product from "./page/User/Product";
+
 function App() {
   return (
     <div className="App">
       <h1>Tôi là app</h1>
+      
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="/user/product" element={<Product />}>
