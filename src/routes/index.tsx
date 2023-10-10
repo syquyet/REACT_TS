@@ -1,3 +1,4 @@
+import Login from "../page/auth/login/login";
 import Register from "../page/auth/register/register";
 import Home from "../page/home";
 import Product from "../page/user/product/product";
@@ -18,5 +19,10 @@ export const routes: I_Routes[] = [
     titles: "Register",
     path: "/auth/register",
     element: <Register/>,
+  },
+  {
+    titles: "login",
+    path: "/auth/login",
+    element: <Login/>
   },
 ];

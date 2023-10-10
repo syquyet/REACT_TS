@@ -2,20 +2,23 @@ import React, { Component } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import Header from "./components/header";
+
 import { routes } from "./routes";
+import Header from "./components/Header/header";
+import Footer from "./components/Footer/footer";
 
 class App extends Component {
   render() {
     return (
       <>
         <BrowserRouter>
-          <Header />
+          <Header/>
           <Routes>
             {routes.map((route, index) => (
               <Route key={index} path={route.path} element={route.element} />
             ))}
           </Routes>
+          <Footer/>
         </BrowserRouter>
       </>
     );

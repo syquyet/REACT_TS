@@ -1,3 +1,8 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 .d-block {
   height: 450px;
   width: 100%;
@@ -11,7 +16,6 @@
 h1 {
   text-align: center;
 }
-
 .seach-product {
   margin: 30px auto;
   background-color: rgb(148, 226, 200);
@@ -117,4 +121,8 @@ h1 {
 .modal-body {
   display: flex;
   width: 100%;
+}
+.row-product{
+ display: flex;
+ flex-wrap: wrap;
 }

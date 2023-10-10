@@ -1,13 +1,15 @@
+import Footer from "../../components/Footer/footer";
+import Header from "../../components/Header/header"
+import Product from "../user/product/product";
 
 
 
 export default function Home(): JSX.Element {
   return (
     <>
-      <h1>trang chủ</h1>
-      <h1>trang chủ</h1>
-      <h1>trang chủ</h1>
-      <h1>trang chủ</h1>
+     
+      <Product/>
+      
    </>
   );
 }
