@@ -1,12 +1,33 @@
 import { RegisterRepository } from "./register.reponsitory";
-export class RegisterService {
-  register(userModal:any) {
-    const registerRepository = new RegisterRepository();
-    const response = registerRepository.registerUser(userModal);
-    return response;
-  }
 
-  validator(userModal:any) {
+class RegisterService {
+  registUser(userModal: any) {
+    const entity = {
+      email: userModal.email,
+      name: userModal.fullname,
+      phone: userModal.phone,
+      password: userModal.password,
+      createdAt: new Date().toLocaleDateString(),
+      role: "custumers",
+      status: true,
+    };
+    const registerRepository = new RegisterRepository();
+    const accountsDB = registerRepository.getUsers();
+    const response = accountsDB.find((user) => user.email === userModal.email);
+    if (!response) {
+      registerRepository.createUser(entity);
+      return {
+        status: "success",
+        message: "Đăng ký thành công",
+      };
+    } else {
+      return {
+        status: "fail",
+        message: "Đăng ký không thành công",
+      };
+    }
+  }
+  validator(userModal: any) {
     const error = {
       isError: false,
       fullname: "",
@@ -17,7 +38,7 @@ export class RegisterService {
     };
     if (!userModal.fullname) {
       error.isError = true;
-      error.fullname = "fullname không được để trống";
+      error.fullname = "*name không được để trống";
     }
     const validRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (!userModal.email.match(validRegex)) {
@@ -39,7 +60,8 @@ export class RegisterService {
     }
     return error;
   }
-  renderValidator(error:any) {
+  // render error validation form
+  renderValidator(error: any) {
     const errorElements = document.querySelectorAll(".error");
     errorElements.forEach((element) => {
       for (const key in error) {
@@ -50,3 +72,4 @@ export class RegisterService {
     });
   }
 }
+export default RegisterService;

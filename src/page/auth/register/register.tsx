@@ -1,5 +1,5 @@
 import "./register.css";
-import onRegister from ".";
+import RegisterEvent from "./register.event";
 export default function Register() {
   return (
     <div className="form-container">
@@ -47,7 +47,7 @@ export default function Register() {
         />
         <p className="error" id="error-repeatPassword" />
         <div id="btn-form-login">
-          <button type="button" onClick={onRegister}>
+          <button type="button" onClick={handleRegister}>
             Đăng ký
           </button>
         </div>
@@ -58,4 +58,20 @@ export default function Register() {
       </form>
     </div>
   );
+}
+// lấy dữ liệu từ form
+function handleRegister() {
+  const inputElements = document.querySelectorAll(
+    ".input-form"
+  ) as NodeListOf<HTMLInputElement>;
+  let userModal: { [key: string]: string } = {};
+  inputElements.forEach((input) => {
+    if (input.name) {
+      const { name, value } = input;
+      userModal[name] = value;
+    }
+  });
+
+  const registerEvent = new RegisterEvent();
+  registerEvent.onRegister(userModal);
 }

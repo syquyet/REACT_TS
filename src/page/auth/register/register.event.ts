@@ -1,20 +1,20 @@
-import { navigation } from "../../../utils/method";
-import { RegisterService } from "./register.service";
-
-export default class RegisterEvent {
-  onRegisterEvent(data:object) {
+import { navigation } from "../../../utils/Navigation";
+import RegisterService from "./register.service";
+class RegisterEvent {
+  onRegister(userModal: any) {
     const registerService = new RegisterService();
-    const error = registerService.validator(data);
+    const error = registerService.validator(userModal);
     registerService.renderValidator(error);
     if (error.isError) {
       return;
     }
-    const response = registerService.register(data);
+    const response = registerService.registUser(userModal);
     if (response.status === "fail") {
-      alert("email đã tồn tại vui lòng nhập lại email để đăng ký");
+      alert(response.message);
     } else if (response.status === "success") {
-      alert("Đăng ký thành công!!!!!!");
+      alert(response.message);
       navigation("/auth/login");
     }
   }
 }
+export default RegisterEvent;

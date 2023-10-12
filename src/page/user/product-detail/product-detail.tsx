@@ -30,21 +30,21 @@ export default function ProductDetail() {
             <div className="carousel-inner">
               <div className="carousel-item active">
                 <img
-                  src="./banner_4.jpg"
+                  src="../../../banner_4.jpg"
                   className="d-block"
                   alt="..."
                 />
               </div>
               <div className="carousel-item">
                 <img
-                  src="./banner_4.jpg"
+                  src="../../../banner_4.jpg"
                   className="d-block"
                   alt="..."
                 />
               </div>
               <div className="carousel-item">
                 <img
-                  src="./banner_4.jpg"
+                  src="../../../banner_4.jpg"
                   className="d-block"
                   alt="..."
                 />

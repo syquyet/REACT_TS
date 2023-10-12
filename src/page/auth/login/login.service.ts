@@ -1,13 +1,35 @@
-import { LoginRepository } from "./login.reponsitory";
+import LoginRepository from "./login.reponsitory";
 
-
-export class LoginService {
-  login(userModal:object) {
+class LoginService {
+  loginUser(userModal: any) {
     const loginRepository = new LoginRepository();
-    const response = loginRepository.loginUser(userModal);
-    return response;
+    const accountsDB = loginRepository.getUsers();
+    let userEntity: any = {};
+    for (const userDB of accountsDB) {
+      if (userDB.email === userModal.email) {
+        if (userDB.password === userModal.password) {
+          userEntity = { ...userModal };
+          break;
+        }
+      }
+    }
+    if (userEntity) {
+      delete userEntity.password;
+      loginRepository.createUser(userEntity);
+      return {
+        status: "success",
+        data: "",
+        messge: "Đăng nhập thành công",
+      };
+    } else {
+      return {
+        status: "success",
+        data: "",
+        messge: "đăng nhập thất bại",
+      };
+    }
   }
-  validator(userModal:any) {
+  validator(userModal: any) {
     const error = {
       isError: false,
       email: "",
@@ -25,8 +47,8 @@ export class LoginService {
 
     return error;
   }
+
   renderValidator(error: any) {
-    console.log(555, error);
     const errorElements = document.querySelectorAll(".error");
     errorElements.forEach((element) => {
       for (const key in error) {
@@ -38,3 +60,4 @@ export class LoginService {
     });
   }
 }
+export default LoginService;

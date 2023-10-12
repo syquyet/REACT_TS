@@ -1,14 +1,10 @@
 import React, { Component } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-
-
 import { routes } from "./routes";
 import Header from "./components/Header/header";
 import Footer from "./components/Footer/footer";
-
-class App extends Component {
-  render() {
+function App() {
     return (
       <>
         <BrowserRouter>
@@ -22,7 +18,7 @@ class App extends Component {
         </BrowserRouter>
       </>
     );
-  }
+ 
 }
 
 export default App;

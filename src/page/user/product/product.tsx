@@ -33,13 +33,13 @@ export default function Product() {
             </div>
             <div className="carousel-inner">
               <div className="carousel-item active">
-                <img src="./baner-1.jpg" className="d-block" alt="..." />
+                <img src="../../../baner-1.jpg" className="d-block" alt="..." />
               </div>
               <div className="carousel-item">
-                <img src="./banner_4.jpg" className="d-block" alt="..." />
+                <img src="../../../banner_4.jpg" className="d-block" alt="..." />
               </div>
               <div className="carousel-item">
-                <img src="./banner_3.jpg" className="d-block" alt="..." />
+                <img src="../../../banner_3.jpg" className="d-block" alt="..." />
               </div>
             </div>
             <button
@@ -200,7 +200,7 @@ export default function Product() {
                   <div className="card">
                     <div className="card-img">
                       <img
-                        src="./banner_4.jpg"
+                        src="../../../banner_4.jpg"
                         className="card-img-top"
                         alt="..."
                       />
@@ -228,7 +228,7 @@ export default function Product() {
                   <div className="card">
                     <div className="card-img">
                       <img
-                        src="./banner_4.jpg"
+                        src="../../../banner_4.jpg"
                         className="card-img-top"
                         alt="..."
                       />
@@ -256,7 +256,7 @@ export default function Product() {
                   <div className="card">
                     <div className="card-img">
                       <img
-                        src="./banner_4.jpg"
+                        src="../../../banner_4.jpg"
                         className="card-img-top"
                         alt="..."
                       />
@@ -284,7 +284,7 @@ export default function Product() {
                   <div className="card">
                     <div className="card-img">
                       <img
-                        src="./banner_4.jpg"
+                        src="../../../banner_4.jpg"
                         className="card-img-top"
                         alt="..."
                       />
@@ -312,7 +312,7 @@ export default function Product() {
                   <div className="card">
                     <div className="card-img">
                       <img
-                        src="./banner_4.jpg"
+                        src="../../../banner_4.jpg"
                         className="card-img-top"
                         alt="..."
                       />
@@ -340,7 +340,7 @@ export default function Product() {
                   <div className="card">
                     <div className="card-img">
                       <img
-                        src="./banner_4.jpg"
+                        src="../../../banner_4.jpg"
                         className="card-img-top"
                         alt="..."
                       />

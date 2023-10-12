@@ -1,6 +1,5 @@
-import onLogin from ".";
 import "./login.css";
-
+import LoginEvent from "./login.event";
 export default function Login() {
   return (
     <div className="form-container">
@@ -24,7 +23,9 @@ export default function Login() {
         />
         <p className="error" id="error-password" />
         <div id="btn-form-login">
-          <button type="button" onClick={onLogin}>Đăng nhập</button>
+          <button type="button" onClick={handleLogin}>
+            Đăng nhập
+          </button>
         </div>
         <p id="navigation">
           Bạn chưa đăng ký tài khoản?
@@ -33,4 +34,18 @@ export default function Login() {
       </form>
     </div>
   );
+}
+function handleLogin() {
+  const inputElements = document.querySelectorAll(
+    ".input-form"
+  ) as NodeListOf<HTMLInputElement>;
+  let userModal: { [key: string]: string } = {};
+  inputElements.forEach((input) => {
+    if (input.name) {
+      const { name, value } = input;
+      userModal[name] = value;
+    }
+  });
+  const loginEvent = new LoginEvent();
+  loginEvent.onLogin(userModal);
 }

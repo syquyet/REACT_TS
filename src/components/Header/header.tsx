@@ -12,12 +12,18 @@ export default function Header() {
             </li>
           </ul>
           <ul className="nav-container">
+           
+            <Link to="/">
             <li>
-              <a href="/index.html">TRANG CHỦ</a>
+              <a href="">TRANG CHỦ</a>
             </li>
-            <li>
-              <a href="/product.html"> SẢN PHẨM </a>
-            </li>
+            </Link>
+            <Link to="/user/product">
+              <li>
+                <a href=""> SẢN PHẨM </a>
+              </li>
+            </Link>
+
             <li>
               <a href="">BỘ SƯU TẬP</a>
             </li>
