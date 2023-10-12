@@ -54,4 +54,4 @@ export const colorBackround = (
   }
 };
 
-export const redecers = combineReducers({ countReducer, todosReducer,colorBackround });
+export const reducers = combineReducers({ countReducer, todosReducer,colorBackround });
