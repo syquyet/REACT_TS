@@ -1,12 +1,16 @@
-*{
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
+.banner-product {
+  margin-top: 60px;
+  padding-top: 0;
+}
 .d-block {
   height: 450px;
   width: 100%;
-  object-fit: cover;
+ object-fit: inherit;
 }
 .card img {
   height: 200px;
@@ -16,6 +20,7 @@
 h1 {
   text-align: center;
 }
+
 .seach-product {
   margin: 30px auto;
   background-color: rgb(148, 226, 200);
@@ -96,7 +101,8 @@ h1 {
 }
 .card {
   box-shadow: 1px 2px 4px rgba(198, 40, 40, 0.907);
-  margin-bottom: 10px;
+ 
+  
 }
 .card-body p {
   margin: 0;
@@ -122,7 +128,8 @@ h1 {
   display: flex;
   width: 100%;
 }
-.row-product{
- display: flex;
- flex-wrap: wrap;
+.album-product{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 30px;
 }

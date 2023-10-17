@@ -1,5 +1,6 @@
 import "./header.css";
 import { Link } from "react-router-dom";
+
 export default function Header() {
   return (
     <>
@@ -7,31 +8,34 @@ export default function Header() {
         <nav>
           <ul>
             <li className="logo-content">
-              <img src="./logo new.jpg" alt="" />
+              <img src="./logo_new.jpg" alt="" />
               <big> SƯƠNGG STORE</big>
             </li>
           </ul>
           <ul className="nav-container">
-           
             <Link to="/">
-            <li>
-              <a href="">TRANG CHỦ</a>
-            </li>
+              <li>
+                <a href="">TRANG CHỦ</a>
+              </li>
             </Link>
             <Link to="/user/product">
               <li>
                 <a href=""> SẢN PHẨM </a>
               </li>
             </Link>
+            <Link to="">
+              <li>
+                <a href="">BỘ SƯU TẬP</a>
+              </li>
+            </Link>
 
-            <li>
-              <a href="">BỘ SƯU TẬP</a>
-            </li>
-            <li>
-              <a href="" style={{ color: "rgb(191, 88, 88)" }}>
-                KHUYẾN MÃI
-              </a>
-            </li>
+            <Link to="">
+              <li>
+                <a href="" style={{ color: "rgb(191, 88, 88)" }}>
+                  KHUYẾN MÃI
+                </a>
+              </li>
+            </Link>
           </ul>
           <ul id="nav-right">
             <Link to="/auth/register">
@@ -46,9 +50,11 @@ export default function Header() {
               </li>
             </Link>
 
-            <li>
-              <i className="fa-solid fa-cart-shopping" />
-            </li>
+            <Link to="/user/cart">
+              <li>
+                <i className="fa-solid fa-cart-shopping" />
+              </li>
+            </Link>
           </ul>
         </nav>
       </header>
