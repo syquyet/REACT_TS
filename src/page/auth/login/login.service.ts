@@ -1,9 +1,9 @@
 import LoginRepository from "./login.reponsitory";
 
 class LoginService {
-  loginUser(userModal: any) {
+  async loginUser(userModal: any) {
     const loginRepository = new LoginRepository();
-    const accountsDB = loginRepository.getUsers();
+    const accountsDB = await loginRepository.getUsers();
     let userEntity: any = {};
     for (const userDB of accountsDB) {
       if (userDB.email === userModal.email) {
@@ -15,6 +15,7 @@ class LoginService {
     }
     if (userEntity) {
       delete userEntity.password;
+      userEntity.isLogin = true;
       loginRepository.createUser(userEntity);
       return {
         status: "success",

@@ -1,19 +1,20 @@
+import { IUser } from "../../../type/type";
 import { RegisterRepository } from "./register.reponsitory";
 
 class RegisterService {
-  registUser(userModal: any) {
+ async registUser(userModal: any) {
     const entity = {
       email: userModal.email,
       name: userModal.fullname,
       phone: userModal.phone,
       password: userModal.password,
-      createdAt: new Date().toLocaleDateString(),
-      role: "custumers",
-      status: true,
+      created_at: new Date().toLocaleDateString(),
+      role: "custumer",
+      status: "activate",
     };
     const registerRepository = new RegisterRepository();
-    const accountsDB = registerRepository.getUsers();
-    const response = accountsDB.find((user) => user.email === userModal.email);
+    const accountsDB = await registerRepository.getUsers();
+    const response = accountsDB.find((user:IUser) => user.email === userModal.email);
     if (!response) {
       registerRepository.createUser(entity);
       return {

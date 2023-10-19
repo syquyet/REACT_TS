@@ -1,12 +1,15 @@
-import { getAllItems, insertItem } from "../../../utils/DBUtil";
 
+import { getAllItems, insertItem } from "../../../utils/DBUtil";
+import axios from "axios";
 export class RegisterRepository {
-  getUsers() {
-    const response = getAllItems("accounts");
-    return response;
+  async   getUsers() {
+    const response = await axios.get(" http://localhost:3000/users") 
+   return response.data 
+    
+    
   }
   createUser(userEntity: any) {
-    const id = insertItem("accounts", userEntity);
+    const id = axios.post("http://localhost:3000/users", userEntity);
     return id;
   }
 }

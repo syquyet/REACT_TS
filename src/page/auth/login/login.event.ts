@@ -1,16 +1,18 @@
+import { navigation } from "../../../utils/Navigation";
 import LoginService from "./login.service";
 
 class LoginEvent {
-  onLogin(userModal: any) {
+  async onLogin(userModal: any) {
     const loginService = new LoginService();
     const error = loginService.validator(userModal);
     loginService.renderValidator(error);
     if (error.isError) {
       return;
     }
-    const response = loginService.loginUser(userModal);
+    const response = await loginService.loginUser(userModal);
     if (response.status === "success") {
       alert(response.messge);
+      navigation("/");
     } else {
       if (response.status === "fail") {
         alert(response.messge);

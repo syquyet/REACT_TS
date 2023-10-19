@@ -1,3 +1,4 @@
+
 import "./register.css";
 import RegisterEvent from "./register.event";
 export default function Register() {
@@ -75,3 +76,4 @@ function handleRegister() {
   const registerEvent = new RegisterEvent();
   registerEvent.onRegister(userModal);
 }
+
