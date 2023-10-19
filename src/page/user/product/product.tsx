@@ -1,6 +1,7 @@
 import React from "react";
 import "./product.css";
 import "../product-detail/product-detail.css";
+import { products } from "../../../model/data";
 export default function Product() {
   return (
     <>
@@ -73,7 +74,7 @@ export default function Product() {
       <section className="album-seach">
         <section className="filter-product">
           <h2>
-            SẢN PHẨM <span>(0)</span>
+            SẢN PHẨM <span>({products.length})</span>
           </h2>
           <h4>Bộ lọc</h4>
           <hr />
@@ -193,32 +194,35 @@ export default function Product() {
           </div>
         </section>
         <section className="album-product">
-          <div className="card">
-            <div className="card-img">
-              <img
-                src="../../banner_4.jpg"
-                className="card-img-top"
-                alt="..."
-              />
-              <div className="btn-img">
-                <i className="fa-solid fa-cart-shopping" />
-                <span className="buy-now">Mua hàng</span>
-                <i className="fa-regular fa-eye" />
-                <span
-                  className="view-now"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                >
-                  xem nhanh
-                </span>
+          {products.map((product, index) => (
+            <div className="card">
+              <div className="card-img">
+                <img
+                  src="../../banner_4.jpg"
+                  className="card-img-top"
+                  alt="..."
+                />
+                <div className="btn-img">
+                  <i className="fa-solid fa-cart-shopping" />
+                  <span className="buy-now">Mua hàng</span>
+                  <i className="fa-regular fa-eye" />
+                  <span
+                    className="view-now"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    xem nhanh
+                  </span>
+                </div>
+              </div>
+              <div className="card-body">
+                <h5 className="card-title">{product.name}</h5>
+                <p className="card-text">size: {product.size.toString()}</p>
+                <p className="card-text">GIÁ:{product.price.toLocaleString()}VND</p>
               </div>
             </div>
-            <div className="card-body">
-              <h5 className="card-title">tên sản phẩm</h5>
-              <p className="card-text">size: X,M,L</p>
-              <p className="card-text">GIÁ:100,000VND</p>
-            </div>
-          </div>
+          ))}
+
           <div className="card">
             <div className="card-img">
               <img
@@ -307,12 +311,12 @@ export default function Product() {
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog">
+        <div className="modal-dialog modal-lg">
           <div className="modal-content">
             <div className="modal-header">
-              <h1 className="modal-title fs-5" id="exampleModalLabel">
+              <h2 className="modal-title fs-5" id="exampleModalLabel">
                 Chi tiết sản phẩm
-              </h1>
+              </h2>
               <button
                 type="button"
                 className="btn-close"

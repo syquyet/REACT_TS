@@ -1,6 +1,7 @@
 import "./header.css";
 import { Link } from "react-router-dom";
 
+
 export default function Header() {
   return (
     <>
@@ -25,7 +26,7 @@ export default function Header() {
             </Link>
             <Link to="">
               <li>
-                <a href="">BỘ SƯU TẬP</a>
+                <a href="">BLOG THỜI TRANG</a>
               </li>
             </Link>
 
@@ -52,9 +53,13 @@ export default function Header() {
 
             <Link to="/user/cart">
               <li>
-                <i className="fa-solid fa-cart-shopping" />
+                <div className="cart-number">
+                  <i className="fa-solid fa-cart-shopping" />
+                  <span className="number-product">0</span>
+                </div>
               </li>
             </Link>
+           
           </ul>
         </nav>
       </header>

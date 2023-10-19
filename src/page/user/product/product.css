@@ -3,14 +3,13 @@
   margin: 0;
   padding: 0;
 }
-.banner-product {
-  margin-top: 60px;
-  padding-top: 0;
-}
+
 .d-block {
+ 
   height: 450px;
   width: 100%;
  object-fit: inherit;
+
 }
 .card img {
   height: 200px;
@@ -50,9 +49,9 @@ h1 {
 .seach-product button:hover {
   background-color: rgb(194, 106, 106);
 }
-.banner-product {
+/* .banner-product {
   margin-top: 60px;
-}
+} */
 .card-img {
   position: relative;
   overflow: hidden;
@@ -74,12 +73,14 @@ h1 {
   color: white;
   text-decoration: none;
   font-size: 12px;
+
 }
 .btn-img .buy-now {
   background-color: black;
   color: white;
   text-decoration: none;
   font-size: 12px;
+ 
 }
 .card:hover .btn-img {
   bottom: 0px;
@@ -132,4 +133,15 @@ h1 {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 30px;
+  min-width: 400px;
+}
+@media (max-width: 900px) {
+  .album-product {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .album-product {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

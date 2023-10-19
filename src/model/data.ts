@@ -16,7 +16,7 @@ export const products=[
     price: 100000,
     size: ["M", "L", "XL"],
     quantity: 20,
-    image: "/assets/image/anh sản phẩm 1.jpg",
+    image: ["/assets/image/anh sản phẩm 2.jpg"],
     describe:
       " Váy chân dài luôn có sức hút và vị trí riêng trong vô vàn sản phẩm thời trang cho nữ",
   },
@@ -26,7 +26,7 @@ export const products=[
     price: 200000,
     size: ["S", "L", "XXL"],
     quantity: 10,
-    image: "/assets/image/anh sản phẩm 2.jpg",
+    image: ["/assets/image/anh sản phẩm 2.jpg"],
     describe:
       " Váy chân dài luôn có sức hút và vị trí riêng trong vô vàn sản phẩm thời trang cho nữ",
   },
@@ -36,7 +36,7 @@ export const products=[
     price: 300000,
     size: ["S", "M", "XXL"],
     quantity: 50,
-    image: "/assets/image/anh sản phẩm 3.jpg",
+    image: ["/assets/image/anh sản phẩm 2.jpg"],
     describe:
       " Váy chân dài luôn có sức hút và vị trí riêng trong vô vàn sản phẩm thời trang cho nữ",
   },
@@ -46,7 +46,7 @@ export const products=[
     price: 400000,
     size: ["M", "L", "XL"],
     quantity: 20,
-    image: "/assets/image/anh sản phẩm 4.jpg",
+    image: ["/assets/image/anh sản phẩm 2.jpg"],
     describe:
       " Váy chân dài luôn có sức hút và vị trí riêng trong vô vàn sản phẩm thời trang cho nữ",
   },
@@ -56,7 +56,7 @@ export const products=[
     price: 500000,
     size: ["M", "L", "XL"],
     quantity: 20,
-    image: "/assets/image/anh sản phẩm 5.jpg",
+    image: ["/assets/image/anh sản phẩm 2.jpg"],
     describe:
       " Váy chân dài luôn có sức hút và vị trí riêng trong vô vàn sản phẩm thời trang cho nữ",
   },
@@ -66,7 +66,7 @@ export const products=[
     price: 600000,
     size: ["L", "XL", "XXL"],
     quantity: 20,
-    image: "/assets/image/anh sản phẩm 6.jpg",
+    image: ["/assets/image/anh sản phẩm 2.jpg"],
     describe:
       " Váy chân dài luôn có sức hút và vị trí riêng trong vô vàn sản phẩm thời trang cho nữ",
   },
@@ -76,7 +76,7 @@ export const products=[
     price: 700000,
     size: ["M", "L", "XL"],
     quantity: 20,
-    image: "/assets/image/anh sản phẩm 7.jpg",
+    image: ["/assets/image/anh sản phẩm 2.jpg"],
     describe:
       " Váy chân dài luôn có sức hút và vị trí riêng trong vô vàn sản phẩm thời trang cho nữ",
   },
@@ -86,7 +86,7 @@ export const products=[
     price: 800000,
     size: ["S", "M", "XXL"],
     quantity: 20,
-    image: "/assets/image/anh sản phẩm 8.jpg",
+    image: ["/assets/image/anh sản phẩm 2.jpg"],
     describe:
       " Váy chân dài luôn có sức hút và vị trí riêng trong vô vàn sản phẩm thời trang cho nữ",
   },
@@ -96,7 +96,7 @@ export const products=[
     price: 900000,
     size: ["M", "L", "XL"],
     quantity: 20,
-    image: "/assets/image/anh sản phẩm 4.jpg",
+    image: ["/assets/image/anh sản phẩm 2.jpg"],
     describe:
       " Váy chân dài luôn có sức hút và vị trí riêng trong vô vàn sản phẩm thời trang cho nữ",
   },
