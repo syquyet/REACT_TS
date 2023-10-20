@@ -8,12 +8,24 @@ export default function Home(): JSX.Element {
   return (
     <>
       <Banner />
+
       <h1>HÀNG MỚI VỀ</h1>
+      <div className="seach-product">
+        <input
+          type="text"
+          name="tim kiếm"
+          id="input-seach"
+          placeholder="Tìm sản phẩm"
+        />
+        <button>Seach</button>
+      </div>
       <div className="fillter-prodcut">
         <select name="" id="">
-          <option value="mới nhất">mới nhất</option>
-          <option value="mới nhất">giá từ thấp tới cao</option>
-          <option value="mới nhất">giá từ cao tới thấp</option>
+          <option value="mới nhất">Mới nhất</option>
+          <option value="giá từ thấp tới cao">Giá từ thấp tới cao</option>
+          <option value="giá từ cao tới thấp">Giá từ cao tới thấp</option>
+          <option value="Bán chạy nhất">Bán chạy nhất</option>
+          <option value="Yêu thích nhất">Yêu thích nhất</option>
         </select>
       </div>
 
@@ -37,7 +49,6 @@ export default function Home(): JSX.Element {
           <p>ĐỔI TRẢ HÀNG TRONG VÒNG 3 NGÀY</p>
         </div>
       </section>
-      <ProductDetail />
     </>
   );
 }

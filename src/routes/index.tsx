@@ -21,7 +21,7 @@ export const routes: I_Routes[] = [
   },
   {
     titles: "Product-detail",
-    path: "/user/product-detail",
+    path: "/user/product-detail/:id",
     element: <ProductDetail/>
   },
   {

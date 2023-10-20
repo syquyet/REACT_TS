@@ -14,14 +14,12 @@ function App() {
   return (
     <>
       <Header />
-  
-      <Routes>
+       <Routes>
         {routes.map((route, index) => (
           <Route key={index} path={route.path} element={route.element} />
         ))}
       </Routes>
-      {/* <ImageUpload /> */}
-      <Footer />
+     <Footer />
 
     </>
   );

@@ -1,65 +1,47 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./product.css";
 import "../product-detail/product-detail.css";
 import { products } from "../../../model/data";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import BannerProduct from "./bannerProduct";
+import ModalProductDetail from "../modal.util/modal";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../redux/store/configureStore";
+import { getProduct } from "../../../redux/slice/productSlice";
+import { ProductEntity } from "../../../entities/product.entity";
 export default function Product() {
+  const dispatch = useDispatch();
+  const [dataProduct, setDataProduct] = useState<any[]>([]);
+  const [dataView, setDataView] = useState<ProductEntity>();
+
+  const product = useSelector((state: RootState) => state.products.data);
+
+  useEffect(() => {
+    getData("http://localhost:3000/products", setDataProduct);
+  }, []);
+  // lấy dữ liệu
+  const getData = async (url: string, setData: Function) => {
+    const response = await axios.get(url);
+    setData(response.data);
+    dispatch(getProduct(response.data));
+  };
+
+  // truyen id product lên url
+  const navigate = useNavigate();
+  const handleBuyNow = (id: number) => {
+    navigate(`/user/product-detail/${id}`);
+  };
+  // xem chi tiết sản phẩm
+  const handleView = (id: string) => {
+    const dataProductView = product.find((item) => item.id.toString() === id);
+    setDataView(dataProductView);
+  };
   return (
     <>
-      <section className="banner-product">
-        <div id="carouselExampleIndicators" className="carousel slide">
-          <div className="carousel-indicators">
-            <button
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide-to={0}
-              className="active"
-              aria-current="true"
-              aria-label="Slide 1"
-            />
-            <button
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide-to={1}
-              aria-label="Slide 2"
-            />
-            <button
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide-to={2}
-              aria-label="Slide 3"
-            />
-          </div>
-          <div className="carousel-inner">
-            <div className="carousel-item active">
-              <img src="../../../baner-1.jpg" className="d-block" alt="..." />
-            </div>
-            <div className="carousel-item">
-              <img src="../../../banner_4.jpg" className="d-block" alt="..." />
-            </div>
-            <div className="carousel-item">
-              <img src="../../../banner_3.jpg" className="d-block" alt="..." />
-            </div>
-          </div>
-          <button
-            className="carousel-control-prev"
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="prev"
-          >
-            <span className="carousel-control-prev-icon" aria-hidden="true" />
-            <span className="visually-hidden">Previous</span>
-          </button>
-          <button
-            className="carousel-control-next"
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="next"
-          >
-            <span className="carousel-control-next-icon" aria-hidden="true" />
-            <span className="visually-hidden">Next</span>
-          </button>
-        </div>
-      </section>
+      <BannerProduct />
+
+      <h1>Bộ sưu tập</h1>
       <div className="seach-product">
         <input
           type="text"
@@ -69,12 +51,11 @@ export default function Product() {
         />
         <button>Seach</button>
       </div>
-      <h1>Bộ sưu tập</h1>
       <hr />
       <section className="album-seach">
         <section className="filter-product">
           <h2>
-            SẢN PHẨM <span>({products.length})</span>
+            SẢN PHẨM <span>({product.length})</span>
           </h2>
           <h4>Bộ lọc</h4>
           <hr />
@@ -90,7 +71,6 @@ export default function Product() {
                 data-filter="price"
               />
               <span>0-200,000VND</span>
-              {/* <label htmlFor="">0đ-200,000đ</label> */}
             </div>
             <div className="filter-group">
               <input
@@ -100,7 +80,6 @@ export default function Product() {
                 data-filter="price"
               />
               <span>200,000-400,000VND</span>
-              {/* <label htmlFor="">200,000đ-400,000đ</label> */}
             </div>
             <div className="filter-group">
               <input
@@ -110,7 +89,6 @@ export default function Product() {
                 data-filter="price"
               />
               <span>400,000-600,000VND</span>
-              {/* <label htmlFor="">400,000đ-600,000đ</label> */}
             </div>
             <div className="filter-group">
               <input
@@ -120,7 +98,6 @@ export default function Product() {
                 data-filter="price"
               />
               <span>600,000-800,000VND</span>
-              {/* <label htmlFor="">600,000đ-800,000đ</label> */}
             </div>
             <div className="filter-group">
               <input
@@ -130,7 +107,6 @@ export default function Product() {
                 data-filter="price"
               />
               <span>800,000-1,000,000VND</span>
-              {/* <label htmlFor="">800,000đ-1,000,000đ</label> */}
             </div>
           </div>
           <div className="select-size">
@@ -145,7 +121,6 @@ export default function Product() {
                 data-filter="size"
               />
               <span>S</span>
-              {/* <label htmlFor="">S</label> */}
             </div>
             <div className="filter-group">
               <input
@@ -155,8 +130,6 @@ export default function Product() {
                 data-filter="size"
               />
               <span>M</span>
-
-              {/* <label htmlFor="">M</label> */}
             </div>
             <div className="filter-group">
               <input
@@ -166,8 +139,6 @@ export default function Product() {
                 data-filter="size"
               />
               <span>L</span>
-
-              {/* <label htmlFor="">L</label> */}
             </div>
             <div className="filter-group">
               <input
@@ -177,8 +148,6 @@ export default function Product() {
                 data-filter="size"
               />
               <span>XL</span>
-
-              {/* <label htmlFor="">XL</label> */}
             </div>
             <div className="filter-group">
               <input
@@ -188,13 +157,11 @@ export default function Product() {
                 data-filter="size"
               />
               <span>XXL</span>
-
-              {/* <label htmlFor="">XXL</label> */}
             </div>
           </div>
         </section>
         <section className="album-product">
-          {products.map((product, index) => (
+          {product.map((product, index) => (
             <div className="card">
               <div className="card-img">
                 <img
@@ -204,12 +171,18 @@ export default function Product() {
                 />
                 <div className="btn-img">
                   <i className="fa-solid fa-cart-shopping" />
-                  <span className="buy-now">Mua hàng</span>
+                  <span
+                    className="buy-now"
+                    onClick={() => handleBuyNow(product.id)}
+                  >
+                    Mua hàng
+                  </span>
                   <i className="fa-regular fa-eye" />
                   <span
                     className="view-now"
                     data-bs-toggle="modal"
                     data-bs-target="#exampleModal"
+                    onClick={() => handleView(`${product.id}`)}
                   >
                     xem nhanh
                   </span>
@@ -218,227 +191,16 @@ export default function Product() {
               <div className="card-body">
                 <h5 className="card-title">{product.name}</h5>
                 <p className="card-text">size: {product.size.toString()}</p>
-                <p className="card-text">GIÁ:{product.price.toLocaleString()}VND</p>
+                <p className="card-text">
+                  GIÁ:{product.price.toLocaleString()}VND
+                </p>
               </div>
             </div>
           ))}
-
-          <div className="card">
-            <div className="card-img">
-              <img
-                src="../../banner_4.jpg"
-                className="card-img-top"
-                alt="..."
-              />
-              <div className="btn-img">
-                <i className="fa-solid fa-cart-shopping" />
-                <span className="buy-now">Mua hàng</span>
-                <i className="fa-regular fa-eye" />
-                <span
-                  className="view-now"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                >
-                  xem nhanh
-                </span>
-              </div>
-            </div>
-            <div className="card-body">
-              <h5 className="card-title">tên sản phẩm</h5>
-              <p className="card-text">size: X,M,L</p>
-              <p className="card-text">GIÁ:100,000VND</p>
-            </div>
-          </div>
-          <div className="card">
-            <div className="card-img">
-              <img
-                src="../../banner_4.jpg"
-                className="card-img-top"
-                alt="..."
-              />
-              <div className="btn-img">
-                <i className="fa-solid fa-cart-shopping" />
-                <span className="buy-now">Mua hàng</span>
-                <i className="fa-regular fa-eye" />
-                <span
-                  className="view-now"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                >
-                  xem nhanh
-                </span>
-              </div>
-            </div>
-            <div className="card-body">
-              <h5 className="card-title">tên sản phẩm</h5>
-              <p className="card-text">size: X,M,L</p>
-              <p className="card-text">GIÁ:100,000VND</p>
-            </div>
-          </div>
-          <div className="card">
-            <div className="card-img">
-              <img
-                src="../../banner_4.jpg"
-                className="card-img-top"
-                alt="..."
-              />
-              <div className="btn-img">
-                <i className="fa-solid fa-cart-shopping" />
-                <span className="buy-now">Mua hàng</span>
-                <i className="fa-regular fa-eye" />
-                <span
-                  className="view-now"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                >
-                  xem nhanh
-                </span>
-              </div>
-            </div>
-            <div className="card-body">
-              <h5 className="card-title">tên sản phẩm</h5>
-              <p className="card-text">size: X,M,L</p>
-              <p className="card-text">GIÁ:100,000VND</p>
-            </div>
-          </div>
         </section>
       </section>
       {/* modal produc-detail */}
-      <div
-        className="modal fade"
-        id="exampleModal"
-        tabIndex={-1}
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-lg">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h2 className="modal-title fs-5" id="exampleModalLabel">
-                Chi tiết sản phẩm
-              </h2>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              />
-            </div>
-            <div className="modal-body">
-              <section className="product_detail-container">
-                <section className="banner-product product_detail-banner">
-                  <div
-                    id="carouselExampleIndicators"
-                    className="carousel slide"
-                  >
-                    <div className="carousel-indicators">
-                      <button
-                        type="button"
-                        data-bs-target="#carouselExampleIndicators"
-                        data-bs-slide-to={0}
-                        className="active"
-                        aria-current="true"
-                        aria-label="Slide 1"
-                      />
-                      <button
-                        type="button"
-                        data-bs-target="#carouselExampleIndicators"
-                        data-bs-slide-to={1}
-                        aria-label="Slide 2"
-                      />
-                      <button
-                        type="button"
-                        data-bs-target="#carouselExampleIndicators"
-                        data-bs-slide-to={2}
-                        aria-label="Slide 3"
-                      />
-                    </div>
-                    <div className="carousel-inner">
-                      <div className="carousel-item active">
-                        <img
-                          src="../../banner_4.jpg"
-                          className="d-block"
-                          alt="..."
-                        />
-                      </div>
-                      <div className="carousel-item">
-                        <img
-                          src="../../banner_4.jpg"
-                          className="d-block"
-                          alt="..."
-                        />
-                      </div>
-                      <div className="carousel-item">
-                        <img
-                          src="../../banner_4.jpg"
-                          className="d-block"
-                          alt="..."
-                        />
-                      </div>
-                    </div>
-                    <button
-                      className="carousel-control-prev"
-                      type="button"
-                      data-bs-target="#carouselExampleIndicators"
-                      data-bs-slide="prev"
-                    >
-                      <span
-                        className="carousel-control-prev-icon"
-                        aria-hidden="true"
-                      />
-                      <span className="visually-hidden">Previous</span>
-                    </button>
-                    <button
-                      className="carousel-control-next"
-                      type="button"
-                      data-bs-target="#carouselExampleIndicators"
-                      data-bs-slide="next"
-                    >
-                      <span
-                        className="carousel-control-next-icon"
-                        aria-hidden="true"
-                      />
-                      <span className="visually-hidden">Next</span>
-                    </button>
-                  </div>
-                </section>
-                <section className="product_detail-content">
-                  <h4>Tên sản phẩm</h4>
-                  <h5>Giá: 100,000đ</h5>
-                  <p>Chọn size:</p>
-                  <div className="btn-size">
-                    <button>S</button>
-                    <button>M</button>
-                    <button>L</button>
-                    <button>XL</button>
-                    <button>XXL</button>
-                  </div>
-                  <p>Chọn số lượng:</p>
-                  <div className="btn-quantity">
-                    <button className="btn-quantity-reduce">-</button>
-                    <span>1</span>
-                    <button className="btn-quantity-add">+</button>
-                  </div>
-                  <div>
-                    <button className="btn-add-product_detail">
-                      Thêm vào giỏ hàng
-                    </button>
-                    <button className="product_detail-btn-buynow">
-                      Mua ngay
-                    </button>
-                    <button className="product_detail-btn-delete">xóa</button>
-                  </div>
-                  <h6>Mô tả sản phẩm</h6>
-                  <hr />
-                  Váy chân dài luôn có sức hút và vị trí riêng trong vô vàn sản
-                  phẩm thời trang cho nữ. Váy chân dài cũng mang đến một hình
-                  ảnh chỉnh chu, sang trọng và nữ tính quyến rũ.
-                </section>
-              </section>
-            </div>
-          </div>
-        </div>
-      </div>
+      <ModalProductDetail data={dataView} />
     </>
   );
 }

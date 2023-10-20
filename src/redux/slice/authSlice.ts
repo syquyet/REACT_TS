@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 export interface UserLogin {
   email: string;
-  password: string;
   [key: string]: string;
 }
 export interface AuthState {
@@ -13,7 +12,8 @@ const initialState: AuthState = {
   isLoggedIn: false,
   user: {
     email: "quyet@gmail.com",
-    password: "11",
+    address: "string"
+    
   },
   loading: false,
 };
