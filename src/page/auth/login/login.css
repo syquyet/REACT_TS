@@ -22,7 +22,7 @@ form * {
 }
 form input {
   padding: 5px;
-  border-radius: 10px;
+  border-radius: 5px;
   border: none;
   outline: none;
   width: 0%;

@@ -11,7 +11,7 @@ class LoginEvent {
     }
     const response = await loginService.loginUser(userModal);
     if (response.status === "success") {
-      alert(response.messge);
+      // alert(response.messge);
       navigation("/");
       
      

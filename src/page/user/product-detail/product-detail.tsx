@@ -30,10 +30,12 @@ export default function ProductDetail() {
   }, [id]);
   useEffect(() => {
     const fetchdata = async () => {
-      const reponse = await axios.get(
-        `http://localhost:3000/users/${userLogin?.id}`
-      );
-      setDataUser(reponse.data);
+      if (userLogin) {
+        const reponse = await axios.get(
+          `http://localhost:3000/users/${userLogin?.id}`
+        );
+        setDataUser(reponse.data);
+      }
     };
     fetchdata();
   }, []);
@@ -51,10 +53,16 @@ export default function ProductDetail() {
   };
 
   const handleAddToCart = async () => {
-    if (userLogin?.email === null) {
+    if (!userLogin?.email) {
       alert("Đăng nhập để mua hàng");
+      navigation("/auth/login");
       return;
     }
+    if (size === "") {
+      alert(" Vui lòng chọn size sản phẩm!!!");
+      return;
+    }
+
     if (dataUser) {
       let cartUser: any = [...dataUser.cart];
       let found = false;

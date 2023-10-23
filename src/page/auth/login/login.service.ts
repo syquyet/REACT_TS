@@ -11,16 +11,14 @@ class LoginService {
     for (const userDB of accountsDB) {
       if (userDB.email === userModal.email) {
         if (userDB.password === userModal.password) {
-          userEntity = { ...userModal };
+          userEntity = { ...userDB };
           break;
         }
       }
     }
 
-    if (userEntity.email) {
-      delete userEntity.password;
-
-      loginRepository.createUser(userEntity);
+    if (userEntity.id) {
+      loginRepository.createUser(userEntity.id);
       return {
         status: "success",
         data: "",

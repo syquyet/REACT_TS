@@ -1,15 +1,18 @@
+import { uuidv4 } from "@firebase/util";
 import { UserEntity } from "../../../entities/user.entity";
 import { IUser } from "../../../type/type";
+
 import { RegisterRepository } from "./register.reponsitory";
 
 class RegisterService {
- async registUser(userModal: any) {
-    const entity:any= {
+  async registUser(userModal: any) {
+    const entity: any = {
+      id: uuidv4().slice(24),
       email: userModal.email,
       name: userModal.fullname,
       phone: userModal.phone,
       password: userModal.password,
-      address:"Đà Nẵng",
+      address: "Đà Nẵng",
       created_at: new Date().toLocaleDateString(),
       role: "custumer",
       status: "activate",
@@ -17,7 +20,9 @@ class RegisterService {
     };
     const registerRepository = new RegisterRepository();
     const accountsDB = await registerRepository.getUsers();
-    const response = accountsDB.find((user:IUser) => user.email === userModal.email);
+    const response = accountsDB.find(
+      (user: IUser) => user.email === userModal.email
+    );
     if (!response) {
       registerRepository.createUser(entity);
       return {

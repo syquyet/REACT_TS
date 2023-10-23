@@ -28,21 +28,21 @@ const listInput = [
   {
     name: "radio",
     min: 400000,
-    max: 800000,
+    max: 600000,
     type: "radio",
     dataFilter: "price3",
   },
   {
     name: "radio",
-    min: 800000,
-    max: 1000000,
+    min: 600000,
+    max: 800000,
     type: "radio",
     dataFilter: "price4",
   },
   {
     name: "radio",
-    min: 1000000,
-    max: 1200000,
+    min: 800000,
+    max: 1000000,
     type: "radio",
     dataFilter: "price5",
   },
@@ -61,7 +61,6 @@ export default function Product() {
       dispatch(getProduct(reponse.data));
     };
     fetchdata();
-   
   }, []);
 
   // truyen id product lên url
@@ -77,7 +76,7 @@ export default function Product() {
   // tìm kiếm theo tên sản phẩm
   const handleSearch = () => {
     const filteredProducts = product.filter((item) =>
-      item.name.toLowerCase().includes(searchTerm.toLowerCase())
+      removeUnicode(item.name).toLowerCase().includes(searchTerm.toLowerCase())
     );
     setDataProduct(filteredProducts);
   };
@@ -87,6 +86,14 @@ export default function Product() {
     );
     setDataProduct(dataFillter);
   };
+  // chuyển đổi tên
+  function removeUnicode(str: string) {
+    return str
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/đ/g, "d")
+      .replace(/Đ/g, "D");
+  }
 
   return (
     <>
@@ -126,7 +133,7 @@ export default function Product() {
                   data-filter={item.dataFilter}
                   onChange={() => handleFillter(item.min, item.max)}
                 />
-                <span>{`${item.min} - ${item.max}VND`}</span>
+                <span>{`${item.min.toLocaleString()} - ${item.max.toLocaleString()}VND`}</span>
               </div>
             ))}
           </div>

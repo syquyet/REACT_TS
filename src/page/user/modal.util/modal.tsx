@@ -21,10 +21,14 @@ export default function ModalProductDetail(props: Props) {
   const userLogin = useSelector((state: RootState) => state.auth.user);
   useEffect(() => {
     const fetchdata = async () => {
-      const reponse = await axios.get(
-        `http://localhost:3000/users/${userLogin?.id}`
-      );
-      setDataUser(reponse.data);
+
+      if (userLogin) {
+        const reponse = await axios.get(
+          `http://localhost:3000/users/${userLogin?.id}`
+        );
+        setDataUser(reponse.data);
+      }
+     
     };
     fetchdata();
   }, []);
@@ -43,6 +47,10 @@ export default function ModalProductDetail(props: Props) {
   const handleAddToCart = async () => {
     if (userLogin?.email === null) {
       alert("Đăng nhập để mua hàng");
+      return;
+    }
+    if (size === "") {
+      alert(" Vui lòng chọn size sản phẩm!!!");
       return;
     }
     if (dataUser) {
@@ -199,13 +207,21 @@ export default function ModalProductDetail(props: Props) {
                   </button>
                 </div>
                 <div>
-                  <button className="btn-add-product_detail" onClick={handleAddToCart}>
+                  <button
+                    className="btn-add-product_detail"
+                    onClick={handleAddToCart}
+                  >
                     Thêm vào giỏ hàng
                   </button>
                   <button className="product_detail-btn-buynow">
                     Mua ngay
                   </button>
-                  <button className="product_detail-btn-delete" onClick={handleSetData}>xóa</button>
+                  <button
+                    className="product_detail-btn-delete"
+                    onClick={handleSetData}
+                  >
+                    xóa
+                  </button>
                 </div>
                 <hr />
                 <h6>MÔ TẢ SẢN PHẨM:</h6>

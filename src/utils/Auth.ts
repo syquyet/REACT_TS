@@ -7,8 +7,9 @@ export default async function Auth() {
     if (auth) {
       const userLocal = JSON.parse(auth);
       const users = await axios.get("http://localhost:3000/users")
-      const user = users.data.find((user:UserEntity) => user.email === userLocal.email);
-      const userLogin: UserLogin= {
+      const user = users.data.find((user:UserEntity) => user.id === userLocal);
+    
+          const userLogin: UserLogin= {
         id: user.id,
         name: user.name,
         email: user.email,

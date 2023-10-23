@@ -1,13 +1,8 @@
-import { useState } from "react";
-import ProductDetail from "../user/product-detail/product-detail";
 import Banner from "./banner";
 import BlockProduct from "./blockProduct";
 import "./home.css";
 import ListProduct from "./listProduct";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux/store/configureStore";
 
-import { ProductEntity } from "../../entities/product.entity";
 
 export default function Home(): JSX.Element {
 
