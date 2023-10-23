@@ -15,16 +15,16 @@ export default function ListProduct() {
   const [dataProduct, setDataProduct] = useState<ProductEntity[]>([]);
   const [dataView, setDataView] = useState<ProductEntity>();
   const product = useSelector((state: RootState) => state.products.data);
- useEffect(() => {
-    getData("http://localhost:3000/products");
-    setDataProduct(product)
+  useEffect(() => {
+    const fetchdata = async () => {
+      const reponse = await axios.get(`http://localhost:3000/products`);
+      setDataProduct(reponse.data);
+      dispatch(getProduct(reponse.data));
+    };
+    
+    fetchdata();
+  
   }, []);
-  // lấy dữ liệu
-    const getData = async (url: string) => {
-    const response = await axios.get(url);
-    dispatch(getProduct(response.data));
-    ;
-  };
   // truyen id product len url
   const navigate = useNavigate();
   const handleBuyNow = (id: number) => {
@@ -35,7 +35,7 @@ export default function ListProduct() {
     const dataProductView = product.find((item) => item.id.toString() === id);
     setDataView(dataProductView);
   };
- 
+
   return (
     <section className="list-product">
       {dataProduct.map((product, index) => (
@@ -63,7 +63,9 @@ export default function ListProduct() {
           </div>
           <div className="card-body">
             <h5 className="card-title">{product.name}</h5>
-            <p className="card-text">size: {product.size.toString()}</p>
+            <p className="card-text">
+              <strong>Mô tả:</strong> <i>{product.describe}</i>
+            </p>
             <p className="card-text">GIÁ:{product.price.toLocaleString()}VND</p>
           </div>
         </div>

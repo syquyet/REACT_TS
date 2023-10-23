@@ -1,6 +1,25 @@
+import { useDispatch, useSelector } from "react-redux";
+
 import "./login.css";
 import LoginEvent from "./login.event";
+
 export default function Login() {
+   const handleLogin = () => {
+    const inputElements = document.querySelectorAll(
+      ".input-form"
+    ) as NodeListOf<HTMLInputElement>;
+    let userModal: { [key: string]: string } = {};
+    inputElements.forEach((input) => {
+      if (input.name) {
+        const { name, value } = input;
+        userModal[name] = value;
+      }
+    });
+    const loginEvent = new LoginEvent();
+    loginEvent.onLogin(userModal);
+  
+  };
+
   return (
     <div className="form-container">
       <form>
@@ -34,18 +53,4 @@ export default function Login() {
       </form>
     </div>
   );
-}
-function handleLogin() {
-  const inputElements = document.querySelectorAll(
-    ".input-form"
-  ) as NodeListOf<HTMLInputElement>;
-  let userModal: { [key: string]: string } = {};
-  inputElements.forEach((input) => {
-    if (input.name) {
-      const { name, value } = input;
-      userModal[name] = value;
-    }
-  });
-  const loginEvent = new LoginEvent();
-  loginEvent.onLogin(userModal);
 }

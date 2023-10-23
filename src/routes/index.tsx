@@ -6,6 +6,7 @@ import Product from "../page/user/product/product";
 import { I_Routes } from "../type/type";
 import Cart from '../page/user/cart/cart';
 import ProductDetail from '../page/user/product-detail/product-detail';
+import Pay from '../page/user/pay/pay';
 
 
 export const routes: I_Routes[] = [
@@ -38,6 +39,11 @@ export const routes: I_Routes[] = [
     titles: "cart",
     path: "/user/cart",
     element: <Cart/>
+  },
+  {
+    titles: "payment",
+    path: "/user/pay",
+    element: <Pay/>
   },
  
 ];

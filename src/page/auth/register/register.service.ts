@@ -4,12 +4,12 @@ import { RegisterRepository } from "./register.reponsitory";
 
 class RegisterService {
  async registUser(userModal: any) {
-    const entity:UserEntity = {
+    const entity:any= {
       email: userModal.email,
       name: userModal.fullname,
       phone: userModal.phone,
       password: userModal.password,
-      address:"",
+      address:"Đà Nẵng",
       created_at: new Date().toLocaleDateString(),
       role: "custumer",
       status: "activate",

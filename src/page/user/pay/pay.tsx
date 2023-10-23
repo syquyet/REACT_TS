@@ -1,6 +1,20 @@
+import { useEffect, useState } from "react";
 import "./pay.css";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/store/configureStore";
 
 export default function Pay() {
+  const [total, setTotal] = useState<number>(0);
+
+  const userLogin = useSelector((state: RootState) => state.auth.user);
+
+  useEffect(() => {
+    let totalMoney = 0;
+    userLogin?.cart?.forEach((cart) => {
+      totalMoney += cart.price * cart.quantity;
+    });
+    setTotal(totalMoney);
+  }, [userLogin?.cart]);
   return (
     <main>
       <div className="pay-container">
@@ -67,38 +81,39 @@ export default function Pay() {
                 <th>SẢN PHẨM</th>
                 <th>TẠM TÍNH</th>
               </tr>
-              <tr>
-                <td className="pay-table-content">
-                  <img
-                    src="/image/anh sản phẩm 8.jpg"
-                    alt=""
-                    width="100px"
-                    height="100px"
-                  />
-                  <div>
-                    x <span>1</span>
-                  </div>
-                  <div>
-                    <h6>Tên sản phẩm</h6>
-                    <p>sze: S</p>
-                  </div>
-                </td>
-                <td>100,000đ</td>
-              </tr>
+              {userLogin?.cart?.map((item) => (
+                <tr>
+                  <td className="pay-table-content">
+                    <img
+                      src="../banner_4.jpg"
+                      alt=""
+                      width="100px"
+                      height="100px"
+                    />
+                    <div>
+                      x <span>{item.quantity}</span>
+                    </div>
+                    <div>
+                      <h6>{item.name}</h6>
+                      <p>sze: {item.size}</p>
+                    </div>
+                  </td>
+                  <td>{(item.price*item.quantity).toLocaleString()}VND</td>
+                </tr>
+              ))}
+
               <tr className="sum-money">
                 <td>TẠM TÍNH</td>
-                <td>100,000đ</td>
+                <td>{total.toLocaleString()}VND</td>
               </tr>
               <tr>
                 <td>TỔNG</td>
-                <td>100,000đ</td>
+                <td>{total.toLocaleString()}VND</td>
               </tr>
             </tbody>
           </table>
           <div className="pay-product-btn">
-            <button type="button" >
-              ĐẶT HÀNG
-            </button>
+            <button type="button">ĐẶT HÀNG</button>
           </div>
         </section>
       </div>

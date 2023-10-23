@@ -1,9 +1,12 @@
+import { useDispatch } from "react-redux";
 import LoginRepository from "./login.reponsitory";
+import { loginSuccess } from "../../../redux/slice/authSlice";
 
 class LoginService {
   async loginUser(userModal: any) {
     const loginRepository = new LoginRepository();
     const accountsDB = await loginRepository.getUsers();
+
     let userEntity: any = {};
     for (const userDB of accountsDB) {
       if (userDB.email === userModal.email) {
@@ -13,9 +16,10 @@ class LoginService {
         }
       }
     }
-    if (userEntity) {
+
+    if (userEntity.email) {
       delete userEntity.password;
-      userEntity.isLogin = true;
+
       loginRepository.createUser(userEntity);
       return {
         status: "success",
@@ -53,7 +57,6 @@ class LoginService {
     const errorElements = document.querySelectorAll(".error");
     errorElements.forEach((element) => {
       for (const key in error) {
-        console.log(666, key);
         if (key === element.id.slice(6)) {
           element.textContent = error[key];
         }

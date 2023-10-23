@@ -1,5 +1,31 @@
- import "./cart.css"
- export default function Cart() {
+import { useEffect, useState } from "react";
+import "./cart.css";
+import { ProductEntity } from "../../../entities/product.entity";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/store/configureStore";
+import { navigation } from "../../../utils/Navigation";
+export default function Cart() {
+  const [total, setTotal] = useState<number>(0);
+
+  const userLogin = useSelector((state: RootState) => state.auth.user);
+
+  useEffect(() => {
+    let totalMoney = 0;
+    userLogin?.cart?.forEach((cart) => {
+      totalMoney += cart.price * cart.quantity;
+    });
+    setTotal(totalMoney);
+  }, [userLogin?.cart]);
+  //  xóa sản phẩm trong cart
+  const handleDeleteCart = (index: number) => {};
+  //
+  const handlePayment = () => {
+    navigation("/user/pay");
+  };
+  const handleBackProduct = () => {
+    navigation("/");
+  };
   return (
     <main>
       <div className="cart-container">
@@ -12,57 +38,35 @@
                 <th>SỐ LƯỢNG</th>
                 <th>TẠM TÍNH</th>
               </tr>
-              <tr>
-                <td className="cart-table-content">
-                  <p>×</p>
-                  <img
-                    src="/image/anh sản phẩm 8.jpg"
-                    alt=""
-                    width="100px"
-                    height="100px"
-                  />
-                  <div>
-                    <h6>Tên sản phẩm</h6>
-                    <p>sze: S</p>
-                  </div>
-                </td>
-                <td>100,000đ</td>
-                <td>
-                  <div className="btn-quantity">
-                    <button className="btn-quantity-reduce">-</button>
-                    <span>0</span>
-                    <button className="btn-quantity-add">+</button>
-                  </div>
-                </td>
-                <td>100,000đ</td>
-              </tr>
-              <tr>
-                <td className="cart-table-content">
-                  <p>×</p>
-                  <img
-                    src="/image/anh sản phẩm 8.jpg"
-                    alt=""
-                    width="100px"
-                    height="100px"
-                  />
-                  <div>
-                    <h6>Tên sản phẩm</h6>
-                    <p>sze: S</p>
-                  </div>
-                </td>
-                <td>100,000đ</td>
-                <td>
-                  <div className="btn-quantity">
-                    <button className="btn-quantity-reduce">-</button>
-                    <span>0</span>
-                    <button className="btn-quantity-add">+</button>
-                  </div>
-                </td>
-                <td>100,000đ</td>
-              </tr>
+              {userLogin?.cart?.map((item, index) => (
+                <tr key={index}>
+                  <td className="cart-table-content">
+                    <p>×</p>
+                    <img
+                      src="../banner_4.jpg"
+                      alt=""
+                      width="100px"
+                      height="100px"
+                    />
+                    <div>
+                      <h6>{item.name}</h6>
+                      <p>sze: {item.size}</p>
+                    </div>
+                  </td>
+                  <td>{item.price.toLocaleString()}VND</td>
+                  <td>
+                    <div className="btn-quantity">
+                      <button className="btn-quantity-reduce">-</button>
+                      <span>{item.quantity}</span>
+                      <button className="btn-quantity-add">+</button>
+                    </div>
+                  </td>
+                  <td>{(item.quantity * item.price).toLocaleString()}VND</td>
+                </tr>
+              ))}
             </tbody>
           </table>
-          <button className="back-product">Tiếp tục xem sản phẩm</button>
+          <button className="back-product" onClick={handleBackProduct}>Tiếp tục xem sản phẩm</button>
           <button className="back-product">Lịch sử mua hàng</button>
         </section>
         <section className="payment">
@@ -73,15 +77,17 @@
               </tr>
               <tr>
                 <td>Tạm tính</td>
-                <td>100,000đ</td>
+                <td>{total.toLocaleString()}VND</td>
               </tr>
               <tr>
                 <td>Tổng</td>
-                <td>100,000đ</td>
+                <td>{total.toLocaleString()}VND</td>
               </tr>
             </tbody>
           </table>
-          <button className="payment-now">TIẾN HÀNH THANH TOÁN</button>
+          <button className="payment-now" onClick={handlePayment}>
+            TIẾN HÀNH THANH TOÁN
+          </button>
         </section>
       </div>
     </main>

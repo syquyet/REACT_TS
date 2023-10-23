@@ -13,9 +13,13 @@ class LoginEvent {
     if (response.status === "success") {
       alert(response.messge);
       navigation("/");
+      
+     
     } else {
       if (response.status === "fail") {
         alert(response.messge);
+       
+        
       }
     }
   }

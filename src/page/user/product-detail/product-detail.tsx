@@ -1,14 +1,43 @@
 import { useParams } from "react-router-dom";
 import "./product-detail.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/store/configureStore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import axios from "axios";
+import { UserEntity } from "../../../entities/user.entity";
+import { getProductDetail } from "../../../redux/slice/productSlice";
+import { navigation } from "../../../utils/Navigation";
 export default function ProductDetail() {
   // lấy id trên url và lọc dữ liệu để lấy sản phẩm
   const { id } = useParams();
-  const product = useSelector((state: RootState) => state.products.data);
+  const dispatch = useDispatch();
+  const [dataUser, setDataUser] = useState<UserEntity>();
+  const dataProduct = useSelector(
+    (state: RootState) => state.products.productDetail
+  );
+  // lưu lại size và số lượng
   const [quantity, setQuantity] = useState<number>(1);
-  const dataProduct = product.find((item) => item.id.toString() === id);
+  const [size, setSize] = useState<string>("");
+  // lấy userLogin từ redux
+  const userLogin = useSelector((state: RootState) => state.auth.user);
+  useEffect(() => {
+    const fetchdata = async () => {
+      const reponse = await axios.get(`http://localhost:3000/products/${id}`);
+      dispatch(getProductDetail(reponse.data));
+    };
+    fetchdata();
+  }, [id]);
+  useEffect(() => {
+    const fetchdata = async () => {
+      const reponse = await axios.get(
+        `http://localhost:3000/users/${userLogin?.id}`
+      );
+      setDataUser(reponse.data);
+    };
+    fetchdata();
+  }, []);
+
   // tăng số lượng
   const handleQuantityAdd = () => {
     setQuantity(quantity + 1);
@@ -19,6 +48,43 @@ export default function ProductDetail() {
     if (quantity <= 1) {
       setQuantity(1);
     }
+  };
+
+  const handleAddToCart = async () => {
+    if (userLogin?.email === null) {
+      alert("Đăng nhập để mua hàng");
+      return;
+    }
+    if (dataUser) {
+      let cartUser: any = [...dataUser.cart];
+      let found = false;
+
+      cartUser.forEach((item: any) => {
+        if (item.id === dataProduct?.id && item.size === size) {
+          item.quantity += quantity;
+          found = true;
+        }
+      });
+
+      if (!found) {
+        cartUser.push({ ...dataProduct, quantity, size });
+      }
+
+      try {
+        const reponse = await axios.put(
+          `http://localhost:3000/users/${userLogin?.id}`,
+          { ...dataUser, cart: cartUser }
+        );
+        console.log(reponse);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    navigation("/user/cart");
+  };
+  const handleSetData = () => {
+    setQuantity(1);
+    setSize("");
   };
 
   return (
@@ -98,9 +164,9 @@ export default function ProductDetail() {
 
           <div className="btn-size">
             {dataProduct?.size.map((size, index) => (
-              <>
-                <button>{size}</button>
-              </>
+              <button onClick={() => setSize(size)} key={index}>
+                {size}
+              </button>
             ))}
           </div>
 
@@ -118,16 +184,18 @@ export default function ProductDetail() {
             </button>
           </div>
           <div>
-            <button className="btn-add-product_detail">
-              <i className="fas fa-shopping-cart"></i>
+            <button
+              className="btn-add-product_detail"
+              onClick={() => handleAddToCart()}
+            >
               Thêm vào giỏ hàng
             </button>
-            <button className="product_detail-btn-buynow">
-              {" "}
-              <i className="fas fa-credit-card"></i> Mua ngay
-            </button>
-            <button className="product_detail-btn-delete">
-              <i className="fas fa-trash"></i>xóa
+            <button className="product_detail-btn-buynow">Mua ngay</button>
+            <button
+              className="product_detail-btn-delete"
+              onClick={handleSetData}
+            >
+              xóa
             </button>
           </div>
           <hr />

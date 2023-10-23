@@ -1,7 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { ProductEntity } from "../../entities/product.entity";
 export interface UserLogin {
-  email: string;
-  [key: string]: string;
+  id:number|undefined;
+  name: string|undefined;
+  email: string|undefined;
+  cart: ProductEntity[]|undefined;
 }
 export interface AuthState {
   isLoggedIn: boolean;
@@ -10,16 +13,26 @@ export interface AuthState {
 }
 const initialState: AuthState = {
   isLoggedIn: false,
-  user: {
-    email: "quyet@gmail.com",
-    address: "string"
-    
-  },
+  user: null,
   loading: false,
 };
 const authSlice = createSlice({
   name: "auth",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    loginSuccess: (state, action: PayloadAction<UserLogin>) => {
+      state.isLoggedIn = true;
+      state.user = action.payload;
+    },
+    loginFailure: (state) => {
+      state.isLoggedIn = false;
+      state.user = null;
+    },
+    logout: (state) => {
+      state.isLoggedIn = false;
+      state.user = null;
+    },
+  },
 });
+export const { loginSuccess, loginFailure, logout } = authSlice.actions;
 export default authSlice.reducer;

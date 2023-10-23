@@ -39,6 +39,8 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
+    color: white;
+    font-size: 14px;
   }
   #img-account{
     width: 40px;
