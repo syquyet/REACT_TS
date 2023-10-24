@@ -7,7 +7,7 @@ import { RootState } from "../../../redux/store/configureStore";
 import { navigation } from "../../../utils/Navigation";
 
 import { loginSuccess } from "../../../redux/slice/authSlice";
-import { ProductEntity } from "../../../entities/product.entity";
+
 export default function Cart() {
   const dispatch = useDispatch();
   const [total, setTotal] = useState<number>(0);
@@ -20,6 +20,9 @@ export default function Cart() {
     });
     setTotal(totalMoney);
   }, [userLogin?.cart]);
+
+  console.log(5555, userLogin?.cart);
+
   //  xóa sản phẩm trong cart
   const handleDeleteCart = async (id: number) => {
     let newCart;
@@ -102,7 +105,7 @@ export default function Cart() {
                       <p>sze: {item.size}</p>
                     </div>
                   </td>
-                  <td>{item.price.toLocaleString()}VND</td>
+                  <td>{item.price?.toLocaleString()}VND</td>
                   <td>
                     <div className="btn-quantity">
                       <button
